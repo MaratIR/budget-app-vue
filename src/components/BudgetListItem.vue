@@ -16,7 +16,7 @@
             v-bind:class="[item.type=='INCOME' ? 'el-icon-top' : 'el-icon-bottom' ]"
           >
             <span class="budget-comment">{{ item.comment }}</span>
-            <span v-bind:class="[item.value>0 ? 'green' : 'red' ]" class="budget-value">{{ item.value }}</span>
+            <span v-bind:class="[item.value>0 ? 'green' : 'red' ]" class="budget-value test">{{ item.value }}</span>
             <!-- <ElButton type="danger" size="mini" @click="deleteItem(item.id)">
              Delete
             </ElButton> -->
