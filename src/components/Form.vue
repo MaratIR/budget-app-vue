@@ -11,7 +11,7 @@
         <ElInput v-model="formData.comment"/>
       </ElFormItem>
       <ElFormItem label="Value" prop="value">
-        <ElInput v-model.number="formData.value"/>
+        <ElInput v-bind:min="[formData.type=='INCOME' ? '1' : '-10000']" v-bind:max="[formData.type=='INCOME' ? '10000' : '-1']" v-model.number="formData.value"/>
       </ElFormItem>
       <ElButton @click="onSubmit" type="primary">Submit</ElButton>
     </ElForm>
@@ -50,9 +50,15 @@ export default {
         },
         {
           type: "number",
-          message: 'Value must be a namber',
+          min:1,
+          message: 'Value must be a pozitive namber ',
           trigger: 'change'
         },
+        // {
+        //   valid: true,
+        //   message: 'Value must be a pozitive',
+        //   trigger: 'change'
+        // },
       ],
     },
   }),
@@ -60,7 +66,8 @@ export default {
     onSubmit() {
       this.$refs.addItemForm.validate((valid) => {
         if (valid) {
-          this.$emit('submitForm', { ...this.formData });
+          // console.log(...this.formData);
+          this.$emit('submitForm', {...this.formData});
           this.$refs.addItemForm.resetFields();
         }
       });
@@ -71,7 +78,7 @@ export default {
 
 <style scoped>
   .form-card {
-    min-width: 500px;
+    max-width: 500px;
     margin: auto;
   }
 
